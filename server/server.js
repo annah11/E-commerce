@@ -5,6 +5,8 @@ const cors = require("cors");
 const authRouter = require("./routes/auth/auth-routes");
 const adminProductsRouter = require("./routes/admin/products-routes");
 const adminOrderRouter = require("./routes/admin/order-routes");
+const morgan = require('morgan'); // Import morgan
+
 
 const shopProductsRouter = require("./routes/shop/products-routes");
 const shopCartRouter = require("./routes/shop/cart-routes");
@@ -19,13 +21,13 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 //create a separate file for this and then import/use that file here
 
 mongoose
-  .connect("mongodb+srv://hanamesfin67:<hanamesfin1996>@cluster0.y4n63.mongodb.net/E-commerce")
+  .connect("mongodb+srv://hanamesfin67:hanamesfin1996@cluster0.y4n63.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+app.use(morgan('tiny'));
 app.use(
   cors({
     origin: "http://localhost:5173",
