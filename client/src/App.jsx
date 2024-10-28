@@ -35,7 +35,7 @@ function App() {
 
   const user = {
     name: "hana",
-    role: "user",
+    role: "admin",
   };
 
   return (
