@@ -17,7 +17,7 @@ function ProductImageUpload({
   isCustomStyling = false,
 }) {
   const inputRef = useRef(null);
-
+// image uploaders
   console.log(isEditMode, "isEditMode");
 
   function handleImageFileChange(event) {
