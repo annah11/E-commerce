@@ -31,12 +31,11 @@ function App() {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  // Display loading skeleton while authentication is being verified
   if (isLoading) return <Skeleton className="w-[800px] h-[600px] bg-black" />;
 
   const user = {
     name: "hana",
-    role: "admin",
+    role: "user",
   };
 
   return (
