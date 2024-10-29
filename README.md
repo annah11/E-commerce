@@ -28,4 +28,4 @@ Start the server
 
 ### Main Screen
 
-![Main Screen](screenshot.png)
+![Main Screen](Screenshot.png)
