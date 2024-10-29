@@ -24,7 +24,7 @@ import PaymentSuccessPage from "./pages/shopping-view/payment-success";
 import SearchProducts from "./pages/shopping-view/search";
 
 function App() {
-  const { user, isAuthenticated, isLoading } = useSelector(
+  const {  isAuthenticated, isLoading } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
@@ -33,7 +33,13 @@ function App() {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
+  if (isLoading) return <Skeleton className="w-[800px] h-[600px] bg-black" />;
+
+  const user = {
+    name: "hana",
+    role: "admin",
+    // role: "user",
+  };
 
   console.log(isLoading, user);
 
