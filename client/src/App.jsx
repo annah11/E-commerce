@@ -37,8 +37,8 @@ function App() {
 
   const user = {
     name: "hana",
-    role: "admin",
-    // role: "user",
+    // role: "admin",
+    role: "user",
   };
 
   console.log(isLoading, user);
