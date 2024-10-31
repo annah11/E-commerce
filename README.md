@@ -30,9 +30,9 @@ Start the server
 
 ![Main Screen](Screenshot.png)
 
-### sign_in
+### signin
 
-![sign in](sign in.png)
+![signin](signin.png)
 
 ### signup
 
