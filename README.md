@@ -37,3 +37,11 @@ Start the server
 ### signup
 
 ![signup](signup.png)
+
+### addproduct
+
+![addproduct](addproduct.png)
+
+### admin_crud
+
+![admin_crud](admin_crud.png)
