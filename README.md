@@ -32,7 +32,7 @@ Start the server
 
 ### sign_in
 
-![sign_in](sign in.png)
+![sign in](sign in.png)
 
 ### signup
 
