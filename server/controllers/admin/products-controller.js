@@ -63,7 +63,7 @@ const addProduct = async (req, res) => {
   }
 };
 
-//fetch all products
+//fetch all products in try catch
 
 const fetchAllProducts = async (req, res) => {
   try {
