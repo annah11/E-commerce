@@ -1,3 +1,4 @@
+// controllers/featureController.js
 const Feature = require("../../models/Feature");
 
 const addFeatureImage = async (req, res) => {
@@ -6,21 +7,21 @@ const addFeatureImage = async (req, res) => {
 
     console.log(image, "image");
 
-    const featureImages = new Feature({
+    const featureImage = new Feature({
       image,
     });
 
-    await featureImages.save();
+    await featureImage.save();
 
     res.status(201).json({
       success: true,
-      data: featureImages,
+      data: featureImage,
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
@@ -37,9 +38,36 @@ const getFeatureImages = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Some error occurred!",
     });
   }
 };
 
-module.exports = { addFeatureImage, getFeatureImages };
+const deleteFeatureImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedImage = await Feature.findByIdAndDelete(id);
+
+    if (!deletedImage) {
+      return res.status(404).json({
+        success: false,
+        message: "Image not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Image deleted successfully",
+      data: deletedImage,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      success: false,
+      message: "Some error occurred!",
+    });
+  }
+};
+
+module.exports = { addFeatureImage, getFeatureImages, deleteFeatureImage };
