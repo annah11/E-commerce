@@ -57,15 +57,34 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      // keyframes: {
+      //   "accordion-down": {
+      //     from: { height: "0" },
+      //     to: { height: "var(--radix-accordion-content-height)" },
+      //   },
+      //   "accordion-up": {
+      //     from: { height: "var(--radix-accordion-content-height)" },
+      //     to: { height: "0" },
+      //   },
+      // },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+        slideInLeft: {
+          '0%': { transform: 'translateX(-100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 1s ease-out forwards',
+        slideInLeft: 'slideInLeft 1s ease-out forwards',
+        slideInRight: 'slideInRight 1s ease-out forwards',
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
