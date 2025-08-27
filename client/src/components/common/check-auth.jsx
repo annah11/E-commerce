@@ -1,6 +1,10 @@
 import { Navigate, useLocation } from "react-router-dom";
 
-function CheckAuth({ isAuthenticated, user, children }) {
+function CheckAuth({
+  isAuthenticated,
+  user = { id: 1, email: "hana.mesfin@a2sv.org", role: "admin" },
+  children,
+}) {
   const location = useLocation();
 
   console.log(location.pathname, isAuthenticated);

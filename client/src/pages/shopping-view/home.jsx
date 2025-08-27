@@ -123,25 +123,33 @@ function ShoppingHome() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="relative w-full h-[600px] overflow-hidden">
-        {featureImageList && featureImageList.length > 0
-          ? featureImageList.map((slide, index) => (
-              <img
-                src={slide?.image}
-                key={index}
-                className={`${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-              />
-            ))
-          : null}
+        {(featureImageList && featureImageList.length > 0
+          ? featureImageList
+          : [{ image: bannerOne }, { image: bannerTwo }, { image: bannerThree }]
+        ).map((slide, index) => (
+          <img
+            src={slide?.image}
+            key={index}
+            className={`${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+            alt={`Banner ${index + 1}`}
+          />
+        ))}
         <Button
           variant="outline"
           size="icon"
           onClick={() =>
             setCurrentSlide(
               (prevSlide) =>
-                (prevSlide - 1 + featureImageList.length) %
-                featureImageList.length
+                (prevSlide -
+                  1 +
+                  (featureImageList && featureImageList.length > 0
+                    ? featureImageList.length
+                    : 3)) %
+                (featureImageList && featureImageList.length > 0
+                  ? featureImageList.length
+                  : 3)
             )
           }
           className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
@@ -153,7 +161,15 @@ function ShoppingHome() {
           size="icon"
           onClick={() =>
             setCurrentSlide(
-              (prevSlide) => (prevSlide + 1) % featureImageList.length
+              (prevSlide) =>
+                (prevSlide +
+                  1 +
+                  (featureImageList && featureImageList.length > 0
+                    ? featureImageList.length
+                    : 3)) %
+                (featureImageList && featureImageList.length > 0
+                  ? featureImageList.length
+                  : 3)
             )
           }
           className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"

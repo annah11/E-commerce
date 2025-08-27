@@ -1,11 +1,16 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const morgan = require("morgan");
+const bcrypt = require("bcrypt");
+
 const authRouter = require("./routes/auth/auth-routes");
 const adminProductsRouter = require("./routes/admin/products-routes");
 const adminOrderRouter = require("./routes/admin/order-routes");
-const morgan = require('morgan'); 
 
 const shopProductsRouter = require("./routes/shop/products-routes");
 const shopCartRouter = require("./routes/shop/cart-routes");
@@ -16,17 +21,26 @@ const shopReviewRouter = require("./routes/shop/review-routes");
 
 const commonFeatureRouter = require("./routes/common/feature-routes");
 
-//create a database connection -> u can also
-//create a separate file for this and then import/use that file here
+console.log("DB_URL:", process.env.DB_URL);
+
+if (!process.env.DB_URL) {
+  console.error("❌ DB_URL is undefined. Please check your .env file!");
+  process.exit(1);
+}
 
 mongoose
-  .connect("mongodb+srv://hanamesfin67:hanamesfin1996@cluster0.y4n63.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.log(error));
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((error) => console.error("❌ MongoDB connection error:", error));
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(morgan('tiny'));
+
+// Middleware
+app.use(morgan("tiny"));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -41,9 +55,10 @@ app.use(
     credentials: true,
   })
 );
-
 app.use(cookieParser());
 app.use(express.json());
+
+// Routes
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/orders", adminOrderRouter);
