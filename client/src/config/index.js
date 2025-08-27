@@ -76,7 +76,7 @@ export const addProductFormElements = [
       { id: "levi", label: "Levi's" },
       { id: "zara", label: "Zara" },
       { id: "h&m", label: "H&M" },
-      { id : "anbesa", label: "Anbesa" },
+      { id: "anbesa", label: "Anbesa" },
     ],
   },
   {

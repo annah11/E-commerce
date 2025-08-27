@@ -43,7 +43,7 @@ const PORT = process.env.PORT || 5000;
 app.use(morgan("tiny"));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://e-commerce-muk2.vercel.app", // your frontend domain
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",

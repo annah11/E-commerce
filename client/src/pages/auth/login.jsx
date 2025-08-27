@@ -1,63 +1,35 @@
-import CommonForm from "@/components/common/form";
-import { useToast } from "@/components/ui/use-toast";
-import { loginFormControls } from "@/config";
-import { loginUser } from "@/store/auth-slice";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { login } from "@/services/api";
 
-const initialState = {
-  email: "",
-  password: "",
-};
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-function AuthLogin() {
-  const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch();
-  const { toast } = useToast();
+function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  function onSubmit(event) {
-    event.preventDefault();
-
-    dispatch(loginUser(formData)).then((data) => {
-      if (data?.payload?.success) {
-        toast({
-          title: data?.payload?.message,
-        });
-      } else {
-        toast({
-          title: data?.payload?.message,
-          variant: "destructive",
-        });
-      }
-    });
-  }
+  const handleLogin = async () => {
+    try {
+      const response = await login({ email, password });
+      // Handle successful login (e.g., save token, redirect)
+      console.log(response.data);
+    } catch (error) {
+      // Handle error (e.g., show error message)
+      console.error(error);
+    }
+  };
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Sign in to your account
-        </h1>
-        <p className="mt-2">
-          Don't have an account
-          <Link
-            className="font-medium ml-2 text-primary hover:underline"
-            to="/auth/register"
-          >
-            Register
-          </Link>
-        </p>
-      </div>
-      <CommonForm
-        formControls={loginFormControls}
-        buttonText={"Sign In"}
-        formData={formData}
-        setFormData={setFormData}
-        onSubmit={onSubmit}
+    <div>
+      {/* Your login form UI */}
+      <input value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        type="password"
       />
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 }
 
-export default AuthLogin;
+export default LoginPage;
