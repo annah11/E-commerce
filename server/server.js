@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
 
 const authRouter = require("./routes/auth/auth-routes");
 const adminProductsRouter = require("./routes/admin/products-routes");
@@ -43,7 +44,7 @@ const PORT = process.env.PORT || 5000;
 app.use(morgan("tiny"));
 app.use(
   cors({
-    origin: "https://e-commerce-muk2.vercel.app", // your frontend domain
+    origin: ["https://minegebeya.netlify.app", "http://localhost:5173"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -71,5 +72,8 @@ app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 
 app.use("/api/common/feature", commonFeatureRouter);
+
+const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
+axios.get(`${API_BASE_URL}/auth/check-auth`, { withCredentials: true });
 
 app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
